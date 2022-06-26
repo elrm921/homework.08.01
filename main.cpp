@@ -1,10 +1,11 @@
 #include <iostream>
 #include <string>
 
-class LengthException : std::exception {
-    void what() {
-        std::cout << "bad_length";
-    }
+class bad_length : std::exception {
+    public:
+        std::string what() {
+            return "Вы ввели слово запретной длины! До свидания";
+        }
 };
 
 int function(std::string str, int forbidden_length) {
@@ -13,7 +14,7 @@ int function(std::string str, int forbidden_length) {
         return length;
     }
     else {
-        throw LengthException();
+        throw bad_length();
     }
 }
 
@@ -31,8 +32,8 @@ int main() {
             int l = function(str, fl);
             std::cout << "Длина слова " << str << " равна " << l << "\n";
         }
-        catch(LengthException) {
-            std::cout << "Вы ввели слово запретной длины! До свидания" << "\n";
+        catch(bad_length e) {
+            std::cout << e.what() << "\n";
             break;
         }
     }
