@@ -4,7 +4,7 @@
 
 class bad_length : std::domain_error {
     public:
-        bad_length(std::string s = "Вы ввели слово запретной длины! До свидания") : std::domain_error(s) {} 
+        bad_length(std::string s) : std::domain_error(s) {} 
         std::string info() {
             return what();
         }
@@ -16,7 +16,7 @@ int function(std::string str, int forbidden_length) {
         return length;
     }
     else {
-        throw bad_length();
+        throw bad_length("Вы ввели слово запретной длины! До свидания");
     }
 }
 
