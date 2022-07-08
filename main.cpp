@@ -1,10 +1,12 @@
 #include <iostream>
 #include <string>
+#include <stdexcept>
 
-class bad_length : std::exception {
+class bad_length : std::domain_error {
     public:
-        std::string what() {
-            return "Вы ввели слово запретной длины! До свидания";
+        bad_length(std::string s = "Вы ввели слово запретной длины! До свидания") : std::domain_error(s) {} 
+        std::string info() {
+            return what();
         }
 };
 
@@ -33,7 +35,7 @@ int main() {
             std::cout << "Длина слова " << str << " равна " << l << "\n";
         }
         catch(bad_length e) {
-            std::cout << e.what() << "\n";
+            std::cout << e.info() << "\n";
             break;
         }
     }
